@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutoring Class</title>
+  <style>
+    #localVideo {
+      width: 300px;
+      height: 225px;
+    }
+
+    #leaveButton {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-right:10px;
+        }
+
+        #attendanceButton {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-right:10px;
+        }
+  </style>
+</head>
+<body>
+  <h1><center>Tutoring Class</center></h1>
+
+  <div>
+    <center><button onclick="startSession()">Start Session</button></center>
+    <center><button onclick="toggleCamera()">On/Off video</button></center>
+    <center><button onclick="toggleAudio()">On/Off audio</button></center>
+  </div>
+
+  <center><video id="localVideo" autoplay playsinline></video></center>
+
+  <center>
+    <button id="leaveButton" onclick="leaveMeeting()">Leave</button>
+    <button id="attendanceButton" onclick="markAttendance()">Mark Attendance</button>
+  </center>
+
+  <script>
+    let localStream;
+
+    function startSession() {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then(stream => {
+          localStream = stream;
+          const localVideo = document.getElementById('localVideo');
+          localVideo.srcObject = stream;
+        })
+        .catch(error => {
+          console.error('Error accessing media devices:', error);
+        });
+    }
+
+    function toggleCamera() {
+      if (localStream) {
+        const videoTrack = localStream.getVideoTracks()[0];
+        videoTrack.enabled = !videoTrack.enabled;
+      }
+    }
+
+    function toggleAudio() {
+      if (localStream) {
+        const audioTrack = localStream.getAudioTracks()[0];
+        audioTrack.enabled = !audioTrack.enabled;
+      }
+    }
+
+    function markAttendance() {
+            // Add logic to mark attendance (e.g., send a request to your server)
+            alert('Attendance marked for the student');
+        }
+  </script>
+  
+
+  <script>
+      function leaveMeeting() {
+          // Add logic for leaving the meeting (e.g., disconnect from video conference platform)
+
+          // Redirect to the page indicating the meeting has ended
+          window.location.href = 'meetend.html';
+      }
+  </script>
+</body>
+</html>

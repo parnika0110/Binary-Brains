@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Schedule Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #nextClass {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        #lateMessage {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        #joinButton {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Class Schedule Notification</h1>
+
+    <div id="nextClass"></div>
+    <div id="lateMessage"></div>
+    <a href="conference.html">Join meeting</a>
+
+    <script>
+        // Define the class schedule
+        const classSchedule = [
+            { startHour: 10, subject: 'Mathematics' },
+            { startHour: 11, subject: 'English' },
+            { startHour: 12, subject: 'Science' },
+            { startHour: 13, subject: 'Lunch Break' },
+            { startHour: 14, subject: 'History' },
+            { startHour: 15, subject: 'Physics' },
+            { startHour: 16, subject: 'Computer Science' },
+            { startHour: 17, subject: 'No more classes' },
+            // Add more classes as needed
+        ];
+
+        let timerInterval;
+
+        function getNextClassStartTime() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+
+            // Find the next class
+            const nextClass = classSchedule.find(classInfo => {
+                const classStart = classInfo.startHour * 60;
+                const classEnd = classStart + 60; // Assuming each class is 1 hour
+                const currentTime = currentHour * 60 + currentMinute;
+
+                return currentTime < classEnd;
+            });
+
+            if (nextClass) {
+                const nextClassStartTime = new Date(now);
+                nextClassStartTime.setHours(nextClass.startHour, 0, 0, 0);
+                return nextClassStartTime;
+            }
+
+            return null;
+        }
+
+        function updateCountdown() {
+            const nextClassStartTime = getNextClassStartTime();
+
+            if (nextClassStartTime) {
+                const timeDifference = nextClassStartTime - new Date();
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                document.getElementById('nextClass').innerHTML = `Next class (${nextClassStartTime.toLocaleTimeString()}): ${classSchedule.find(classInfo => classInfo.startHour === nextClassStartTime.getHours()).subject} starts in ${minutes} minutes and ${seconds} seconds`;
+
+                // Notify 10 minutes before the class
+                if (timeDifference <= 600000 && timeDifference > 0) {
+                    notify(`Class starts in 10 minutes: ${nextClassStartTime.toLocaleTimeString()} - ${classSchedule.find(classInfo => classInfo.startHour === nextClassStartTime.getHours()).subject}`);
+                }
+
+                // Check if student is late
+                const lateThreshold = 60000; // 1 minute (adjust as needed)
+                if (timeDifference < 0 && Math.abs(timeDifference) < lateThreshold) {
+                    document.getElementById('lateMessage').innerHTML = `You are late to the class!`;
+                    document.getElementById('joinButton').style.display = 'block';
+                    clearInterval(timerInterval);
+                } else {
+                    document.getElementById('lateMessage').innerHTML = '';
+                    document.getElementById('joinButton').style.display = 'none';
+                }
+            } else {
+                document.getElementById('nextClass').innerHTML = 'No more classes today.';
+                document.getElementById('joinButton').style.display = 'none';
+                clearInterval(timerInterval);
+            }
+        }
+
+        function notify(message) {
+            // Add your notification logic here
+            alert(message);
+        }
+
+        function joinClass() {
+            // Add logic to handle joining the class
+            alert('Joining the class!');
+        }
+
+        // Update the countdown every second
+        timerInterval = setInterval(updateCountdown, 1000);
+
+        // Initial update
+        updateCountdown();
+    </script>
+</body>
+</html>

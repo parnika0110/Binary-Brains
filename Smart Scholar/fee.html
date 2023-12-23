@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 20px;
+        }
+        #generateInvoiceButton {
+            display: none;
+            margin-top: 20px;
+        }
+        #invoiceInput {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fee Payment</h1>
+
+    <p>Have you paid the fee?</p>
+    <button class="button" onclick="showSuccessMessage()">Yes</button>
+    <button class="button" onclick="showNotPaidMessage()">No</button>
+
+    <div id="message"></div>
+    <button id="generateInvoiceButton" class="button" onclick="generateInvoice()">Generate Invoice  </button>
+    <input type="file" id="invoiceInput" accept=".pdf, .doc, .docx" onchange="handleInvoiceFile(this)" />
+
+    <script>
+        function showSuccessMessage() {
+            const messageDiv = document.getElementById('message');
+            const generateInvoiceButton = document.getElementById('generateInvoiceButton');
+            const invoiceInput = document.getElementById('invoiceInput');
+
+            messageDiv.innerHTML = '<p>You have paid the fee successfully.</p>';
+            generateInvoiceButton.style.display = 'inline-block';
+            invoiceInput.style.display = 'none';
+        }
+
+        function showNotPaidMessage() {
+            const messageDiv = document.getElementById('message');
+            const generateInvoiceButton = document.getElementById('generateInvoiceButton');
+            const invoiceInput = document.getElementById('invoiceInput');
+
+            messageDiv.innerHTML = '<p>Fees not paid. Please make the payment to proceed.</p>';
+            generateInvoiceButton.style.display = 'none';
+            invoiceInput.style.display = 'none';
+        }
+
+        function generateInvoice() {
+            const invoiceInput = document.getElementById('invoiceInput');
+            const selectedFile = invoiceInput.files[0];
+
+            if (selectedFile) {
+                // Read the contents of the file
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    // Open the file content in a new window or tab
+                    const newWindow = window.open();
+                    newWindow.document.write('<pre>' + event.target.result + '</pre>');
+                };
+                reader.readAsText(selectedFile);
+            } else {
+                alert('Invoice is generated successfully!');
+                window.open('invoice.html', '_blank');
+            }
+        }
+
+        function handleInvoiceFile(input) {
+            const fileNameDisplay = document.getElementById('invoiceFileName');
+            const selectedFile = input.files[0];
+
+            if (selectedFile) {
+                fileNameDisplay.innerHTML = `Selected File: ${selectedFile.name}`;
+            } else {
+                fileNameDisplay.innerHTML = '';
+            }
+        }
+    </script>
+    <a href="frontpage.html" class="button">Back to Home</a>
+</body>
+</body>
+</html>

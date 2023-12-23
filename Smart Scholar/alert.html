@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .notification-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .notification {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .alert {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .progress-report {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Alert System</h1>
+
+    <div class="notification-box">
+        <div class="notification">Class starting soon: Math with Professor Smith</div>
+        <div class="notification">Class starting soon: Physics with Professor Wilson</div>
+    </div>
+
+    <div class="notification-box">
+        <div class="alert">Alert: Upcoming Maths test today. Prepare accordingly.</div>
+        <div class="alert">Invoice generated for Math tutoring session.</div>
+    </div>
+
+    <div class="notification-box">
+        <div class="progress-report">Progress Report: Mathematics Class - A</div>
+        <div class="progress-report">Progress Report: English Class - B</div>
+    </div>
+
+    <a href="frontpage.html" class="button">Back to Home</a>
+</body>
+</html>
+

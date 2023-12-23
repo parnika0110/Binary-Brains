@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporting System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .report-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .report {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .progress-report {
+            background-color: #e67e22;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .other-metrics {
+            background-color: #9b59b6;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reporting System</h1>
+
+    <div class="report-box">
+        <div class="report">Attendance Report: January 2023</div>
+        <div class="report">Attendance Report: February 2023</div>
+    </div>
+
+    <div class="report-box">
+        <div class="progress-report">Progress Report: Mathematics Class - A</div>
+        <div class="progress-report">Progress Report: English Class - B</div>
+    </div>
+
+    <div class="report-box">
+        <div class="other-metrics">Other Metrics Report: Semester 1</div>
+        <div class="other-metrics">Other Metrics Report: Semester 2</div>
+    </div>
+    <a href="frontpage.html" class="button">Back to Home</a>
+</body>
+</html>
+

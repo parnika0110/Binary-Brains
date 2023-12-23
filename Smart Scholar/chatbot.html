@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Tutoring Chatbot</title>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-output"></div>
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById('user-input').value;
+            displayUserMessage(userInput);
+            processUserMessage(userInput);
+        }
+
+        function displayUserMessage(message) {
+            var chatOutput = document.getElementById('chat-output');
+            chatOutput.innerHTML += '<div class="user-message">You: ' + message + '</div>';
+        }
+
+        function displayBotMessage(message) {
+            var chatOutput = document.getElementById('chat-output');
+            chatOutput.innerHTML += '<div class="bot-message">Bot: ' + message + '</div>';
+        }
+
+        function processUserMessage(message) {
+            // Send the user message to the backend for NLP processing
+            // In a real-world scenario, this would involve making an API call
+            // to a server with the user message and receiving the bot's response.
+
+            // For simplicity, let's simulate a response for specific queries.
+            if (message.toLowerCase().includes('class timetable')) {
+                displayBotMessage('Here is your class timetable...');
+            } else if (message.toLowerCase().includes('cancel class')) {
+                displayBotMessage('Your class has been canceled.');
+            } else if (message.toLowerCase().includes('class schedule')) {
+                displayBotMessage('Your class schedule is...');
+            } else {
+                displayBotMessage("Thank you for your message!");
+            }
+        }
+    </script>
+</body>
+</html>
